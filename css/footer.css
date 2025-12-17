@@ -1,0 +1,55 @@
+footer {
+  & .keyboard-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 0;
+    gap: 4px;
+
+    & button {
+      min-width: 24px;
+      width: 48px;
+      font-family: monospace;
+      text-transform: uppercase;
+      border: 1px solid #000;
+      font-size: 24px;
+
+      &:not(.key) {
+        aspect-ratio: 1 / 1;
+      }
+
+      &:has(img) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & img {
+          width: 20px;
+        }
+      }
+
+      &.key {
+        width: 64px;
+        aspect-ratio: 64/ 48;
+        font-size: 16px;
+      }
+
+      &:hover {
+        background-color: #000;
+        color: #fff;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  footer {
+    & .keyboard {
+      & button {
+        &.key {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}

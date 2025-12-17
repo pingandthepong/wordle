@@ -1,0 +1,71 @@
+header {
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  position: relative;
+
+  & .menu {
+    height: 100%;
+    padding: 4px;
+  }
+
+  & .title {
+    font-family: "nyt-title";
+    text-transform: capitalize;
+    font-size: 28px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 1px;
+      background-color: #000;
+      left: 0;
+      bottom: 0;
+      transition: all 0.15s ease-out;
+    }
+
+    &:hover {
+      &::before {
+        width: 100%;
+      }
+    }
+  }
+
+  & .icons {
+    display: flex;
+    gap: 4px;
+
+    & li {
+      flex-basis: calc(100% / 4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & a {
+        &:hover {
+          animation: bounce 0.65s infinite;
+        }
+      }
+    }
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wordle</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header>
+      <button class="menu"><img src="./assets/menu.svg" alt="" /></button>
+      <h1 class="title"><a href="#">wordle</a></h1>
+      <ul class="icons">
+        <li>
+          <a href="javascript:void(0)">
+            <img src="./assets/forum.svg" alt="" />
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)">
+            <img src="./assets/stats.svg" alt="" />
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)">
+            <img src="./assets/help.svg" alt="" />
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)">
+            <img src="./assets/settings.svg" alt="" />
+          </a>
+        </li>
+      </ul>
+    </header>
+    <main>
+      <section class="game-timer">
+        <h2 class="visually-hidden">걸린 시간</h2>
+        <p id="timer">TIME 00:00</p>
+      </section>
+      <section class="game-board">
+        <h2 class="visually-hidden">Game 영역</h2>
+        <div class="boards">
+          <div class="board-row row-0">
+            <div class="board-column" data-index="00"></div>
+            <div class="board-column" data-index="01"></div>
+            <div class="board-column" data-index="02"></div>
+            <div class="board-column" data-index="03"></div>
+            <div class="board-column" data-index="04"></div>
+          </div>
+          <div class="board-row row-1">
+            <div class="board-column" data-index="10"></div>
+            <div class="board-column" data-index="11"></div>
+            <div class="board-column" data-index="12"></div>
+            <div class="board-column" data-index="13"></div>
+            <div class="board-column" data-index="14"></div>
+          </div>
+          <div class="board-row row-2">
+            <div class="board-column" data-index="20"></div>
+            <div class="board-column" data-index="21"></div>
+            <div class="board-column" data-index="22"></div>
+            <div class="board-column" data-index="23"></div>
+            <div class="board-column" data-index="24"></div>
+          </div>
+          <div class="board-row row-3">
+            <div class="board-column" data-index="30"></div>
+            <div class="board-column" data-index="31"></div>
+            <div class="board-column" data-index="32"></div>
+            <div class="board-column" data-index="33"></div>
+            <div class="board-column" data-index="34"></div>
+          </div>
+          <div class="board-row row-4">
+            <div class="board-column" data-index="40"></div>
+            <div class="board-column" data-index="41"></div>
+            <div class="board-column" data-index="42"></div>
+            <div class="board-column" data-index="43"></div>
+            <div class="board-column" data-index="44"></div>
+          </div>
+          <div class="board-row row-5">
+            <div class="board-column" data-index="50"></div>
+            <div class="board-column" data-index="51"></div>
+            <div class="board-column" data-index="52"></div>
+            <div class="board-column" data-index="53"></div>
+            <div class="board-column" data-index="54"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="keyboard-row row-0">
+        <button data-key="q">q</button>
+        <button data-key="w">w</button>
+        <button data-key="e">e</button>
+        <button data-key="r">r</button>
+        <button data-key="t">t</button>
+        <button data-key="y">y</button>
+        <button data-key="u">u</button>
+        <button data-key="i">i</button>
+        <button data-key="o">o</button>
+        <button data-key="p">p</button>
+      </div>
+      <div class="keyboard-row row-1">
+        <button data-key="a">a</button>
+        <button data-key="s">s</button>
+        <button data-key="d">d</button>
+        <button data-key="f">f</button>
+        <button data-key="g">g</button>
+        <button data-key="h">h</button>
+        <button data-key="j">j</button>
+        <button data-key="k">k</button>
+        <button data-key="l">l</button>
+      </div>
+      <div class="keyboard-row row-2">
+        <button data-key="enter" class="key">enter</button>
+        <button data-key="z">z</button>
+        <button data-key="x">x</button>
+        <button data-key="c">c</button>
+        <button data-key="v">v</button>
+        <button data-key="b">b</button>
+        <button data-key="n">n</button>
+        <button data-key="m">m</button>
+        <button data-key="delete" class="key">
+          <img src="./assets/delete.svg" alt="delete" />
+        </button>
+      </div>
+    </footer>
+  </body>
+</html>

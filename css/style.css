@@ -1,0 +1,21 @@
+@import "reset.css";
+@import "header.css";
+@import "main.css";
+@import "footer.css";
+
+@font-face {
+  font-family: "nyt-title";
+  src: url(../assets/fonts/karnakcondensed-normal-700.woff2) format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}
