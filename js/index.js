@@ -31,8 +31,10 @@ function appStart() {
 
   const gameOver = (result) => {
     window.removeEventListener("keydown", handleKeyDown);
-
     clearInterval(timer);
+
+    const printTimeEl = document.querySelector(".total-time");
+    printTimeEl.innerText = document.querySelector("#timer").innerText;
 
     if (result) {
       document.querySelector(".game-over").classList.add("show");
