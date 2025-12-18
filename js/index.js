@@ -19,7 +19,6 @@ let index = 0;
 
 function appStart() {
   const nextLine = () => {
-    console.log(attempts);
     if (attempts === 5) {
       gameOver(false);
     }
@@ -29,8 +28,6 @@ function appStart() {
   };
 
   const gameOver = (result) => {
-    console.log("game over");
-
     window.removeEventListener("keydown", handleKeyDown);
 
     if (result) {
@@ -39,6 +36,17 @@ function appStart() {
       document.querySelector(".game-over").classList.add("show");
       document.querySelector(".game-over .title").innerText = "Lose 😭";
     }
+  };
+
+  const handleBackspace = () => {
+    if (index > 0) {
+      const preBoard = document.querySelector(
+        `.board-column[data-index="${attempts}${index - 1}"]`
+      );
+
+      preBoard.innerText = "";
+    }
+    if (index !== 0) index--;
   };
 
   const handleEnterKey = () => {
@@ -72,12 +80,14 @@ function appStart() {
     const board = document.querySelector(
       `.board-column[data-index="${attempts}${index}"]`
     );
-    if (index < 4 && attempts < 6 && keyCode === 13) {
+
+    if (key === "BACKSPACE") handleBackspace();
+    else if (index < 4 && attempts < 6 && keyCode === 13)
       alert("영문 다섯 글자를 모두 입력해주세요.");
-    } else if (index === 5) {
+    else if (index === 5) {
       if (keyCode === 13) handleEnterKey();
       else return;
-    } else if (keyCode >= 65 && keyCode <= 90 && /^[a-zA-Z]$/.test(key)) {
+    } else if (/^[a-zA-Z]$/.test(key)) {
       // a ~ z 영문만 입력 가능
       board.innerText = key;
       index++;
@@ -85,8 +95,6 @@ function appStart() {
 
     // test
     // console.log(`key: ${key} keyCode: ${keyCode}`);
-    // console.log(board);
-    // console.log(index);
   };
 
   window.addEventListener("keydown", handleKeyDown);
