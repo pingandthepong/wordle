@@ -44,7 +44,9 @@ footer {
 
 @media (max-width: 480px) {
   footer {
-    & .keyboard {
+    padding: 0 16px;
+
+    & .keyboard-row {
       & button {
         &.key {
           font-size: 10px;

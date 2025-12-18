@@ -1,10 +1,11 @@
 header {
-  height: 48px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 8px;
   position: relative;
+  border-bottom: 1px solid #000;
 
   & .menu {
     height: 100%;
@@ -27,8 +28,9 @@ header {
       width: 0;
       height: 1px;
       background-color: #000;
-      left: 0;
+      left: 50%;
       bottom: 0;
+      transform: translateX(-50%);
       transition: all 0.15s ease-out;
     }
 

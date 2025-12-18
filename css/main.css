@@ -24,6 +24,18 @@ section.game-board .boards {
       justify-content: center;
       align-items: center;
       font-size: 24px;
+
+      &.correct {
+        background-color: green;
+        color: #fff;
+      }
+      &.includes {
+        background-color: yellow;
+      }
+      &.not-correct {
+        background-color: gray;
+        color: #fff;
+      }
     }
   }
 }
