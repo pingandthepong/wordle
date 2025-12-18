@@ -26,8 +26,8 @@
   top: 50%;
   transform: translate(-50%, -50%);
   animation: ceremony 1s;
-  width: 80vw;
-  height: 80vh;
+  width: 70vw;
+  height: 60vh;
   background-color: #000;
   display: none;
   flex-direction: column;

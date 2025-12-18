@@ -1,5 +1,6 @@
 import { initCloseButton } from "./utils.js";
 import { initReplayButton } from "./utils.js";
+import { startTimer } from "./utils.js";
 
 // ==================================================
 // # 요구사항
@@ -16,6 +17,7 @@ import { initReplayButton } from "./utils.js";
 const ANSWER = "APPLE";
 let attempts = 0;
 let index = 0;
+let timer;
 
 function appStart() {
   const nextLine = () => {
@@ -29,6 +31,8 @@ function appStart() {
 
   const gameOver = (result) => {
     window.removeEventListener("keydown", handleKeyDown);
+
+    clearInterval(timer);
 
     if (result) {
       document.querySelector(".game-over").classList.add("show");
@@ -98,6 +102,8 @@ function appStart() {
   };
 
   window.addEventListener("keydown", handleKeyDown);
+
+  timer = startTimer();
   initCloseButton();
   initReplayButton();
 }

@@ -15,3 +15,18 @@ export function initReplayButton() {
     location.reload();
   });
 }
+
+export function startTimer(timer) {
+  const startTime = new Date();
+
+  const setTime = () => {
+    const currentTime = new Date();
+    const timeDiff = new Date(currentTime - startTime);
+    const minutes = timeDiff.getMinutes().toString().padStart(2, "0");
+    const seconds = timeDiff.getSeconds().toString().padStart(2, "0");
+
+    document.querySelector("#timer").innerText = `TIME ${minutes}:${seconds}`;
+  };
+
+  return setInterval(setTime, 1000);
+}
