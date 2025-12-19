@@ -34,8 +34,15 @@ footer {
         font-size: 16px;
       }
 
-      &:hover {
-        background-color: #000;
+      &.correct {
+        background-color: green;
+        color: #fff;
+      }
+      &.includes {
+        background-color: yellow;
+      }
+      &.not-correct {
+        background-color: gray;
         color: #fff;
       }
     }

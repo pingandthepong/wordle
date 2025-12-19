@@ -9,8 +9,8 @@ import { startTimer } from "./utils.js";
 // DONE 2. 6번의 시도 가능
 // DONE 3. 존재하면 노란색, 위치도 맞으면 초록색
 // DONE 4. 게임 종료 판단
-// 5. (추가) 상단에 게임 시간 표시
-// 6. (선택) 키보드에도 동일하게 표시
+// DONE 5. (추가) 상단에 게임 시간 표시
+// DONE 6. (선택) 키보드에도 동일하게 표시
 // 7. (선택) 키보드 클릭으로도 입력
 // ==================================================
 
@@ -55,7 +55,7 @@ function appStart() {
     if (index !== 0) index--;
   };
 
-  const handleEnterKey = () => {
+  const handleEnterKey = (e) => {
     let correctCount = 0;
 
     for (let i = 0; i < 5; i++) {
@@ -64,14 +64,20 @@ function appStart() {
       );
       const userAnswer = block.innerText;
       const ANSWERLetter = ANSWER[i];
+      const keyBoard = document.querySelector(
+        `.keyboard-row button[data-key="${userAnswer.toLowerCase()}"] `
+      );
 
       if (userAnswer === ANSWERLetter) {
         correctCount++;
         block.classList.add("correct");
+        keyBoard.classList.add("correct");
       } else if (ANSWER.includes(userAnswer)) {
         block.classList.add("includes");
+        keyBoard.classList.add("includes");
       } else {
         block.classList.add("not-correct");
+        keyBoard.classList.add("not-correct");
       }
     }
 
@@ -91,7 +97,7 @@ function appStart() {
     else if (index < 4 && attempts < 6 && keyCode === 13)
       alert("영문 다섯 글자를 모두 입력해주세요.");
     else if (index === 5) {
-      if (keyCode === 13) handleEnterKey();
+      if (keyCode === 13) handleEnterKey(e);
       else return;
     } else if (/^[a-zA-Z]$/.test(key)) {
       // a ~ z 영문만 입력 가능
