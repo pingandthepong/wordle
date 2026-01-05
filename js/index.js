@@ -45,14 +45,14 @@ function appStart() {
   };
 
   const handleBackspace = () => {
-    if (index > 0) {
-      const preBoard = document.querySelector(
-        `.board-column[data-index="${attempts}${index - 1}"]`
-      );
+    if (index === 0) return;
 
-      preBoard.innerText = "";
-    }
-    if (index !== 0) index--;
+    index--;
+
+    const preBlock = document.querySelector(
+      `.board-column[data-index="${attempts}${index}"]`
+    );
+    preBlock.textContent = "";
   };
 
   const handleEnterKey = (e) => {
