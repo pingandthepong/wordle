@@ -1,4 +1,6 @@
 footer {
+  touch-action: manipulation;
+
   & .keyboard-row {
     display: flex;
     justify-content: center;
