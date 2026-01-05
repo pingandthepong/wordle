@@ -1,6 +1,4 @@
-import { initCloseButton } from "./utils.js";
-import { initReplayButton } from "./utils.js";
-import { startTimer } from "./utils.js";
+import { initCloseButton, initReplayButton, updateTime } from "./utils.js";
 
 // ==================================================
 // # 요구사항
@@ -14,105 +12,145 @@ import { startTimer } from "./utils.js";
 // DONE 7. (선택) 키보드 클릭으로도 입력
 // ==================================================
 
+// ==============================
+// Constants
+// ==============================
+const WORD_LENGTH = 5;
+const MAX_ATTEMPTS = 6;
+const allowed = /^[a-zA-Z]$/;
+const ANSWER = "APPLE";
+
+// ==============================
+// State
+// ==============================
+let attempts = 0;
+let index = 0;
 let timer;
 
-function appStart() {
-  const nextLine = () => {
-    if (attempts === 5) {
-      gameOver(false);
-    }
+// ==============================
+// DOM Helpers
+// ==============================
+const getBlock = (row, col) =>
+  document.querySelector(`.board-column[data-index="${row}${col}"]`);
 
-    attempts++;
-    index = 0;
-  };
+const getKeyboardKey = (key) =>
+  document.querySelector(`.keyboard-row button[data-key="${key}"]`);
 
-  const gameOver = (result) => {
-    window.removeEventListener("keydown", handleKeyDown);
-    clearInterval(timer);
+// ==============================
+// Game Control
+// ==============================
+const gameOver = (isWin) => {
+  window.removeEventListener("keydown", handleKeyDown);
+  clearInterval(timer);
 
-    const printTimeEl = document.querySelector(".total-time");
-    printTimeEl.innerText = document.querySelector("#timer").innerText;
+  document.querySelector(".total-time").innerText =
+    document.querySelector("#timer").innerText;
 
-    if (result) {
-      document.querySelector(".game-over").classList.add("show");
-    } else {
-      document.querySelector(".game-over").classList.add("show");
-      document.querySelector(".game-over .title").innerText = "Lose 😭";
-    }
-  };
+  const gameOverEl = document.querySelector(".game-over");
+  gameOverEl.classList.add("show");
 
-  const handleBackspace = () => {
-    if (index === 0) return;
-
-    index--;
-
-    const preBlock = document.querySelector(
-      `.board-column[data-index="${attempts}${index}"]`
-    );
-    preBlock.textContent = "";
-  };
-
-  const handleEnterKey = (e) => {
-    let correctCount = 0;
-
-    for (let i = 0; i < 5; i++) {
-      const block = document.querySelector(
-        `.board-column[data-index="${attempts}${i}"]`
-      );
-      const userAnswer = block.innerText;
-      const ANSWERLetter = ANSWER[i];
-      const keyBoard = document.querySelector(
-        `.keyboard-row button[data-key="${userAnswer.toLowerCase()}"] `
-      );
-
-      if (userAnswer === ANSWERLetter) {
-        correctCount++;
-        block.classList.add("correct");
-        keyBoard.classList.add("correct");
-      } else if (ANSWER.includes(userAnswer)) {
-        block.classList.add("includes");
-        keyBoard.classList.add("includes");
-      } else {
-        block.classList.add("not-correct");
-        keyBoard.classList.add("not-correct");
-      }
-    }
-
-    if (correctCount === 5) gameOver(true);
-    else nextLine();
-  };
-
-  const handleKeyDown = (e) => {
-    const key = e.key.toUpperCase();
-    const keyCode = e.keyCode;
-
-    const board = document.querySelector(
-      `.board-column[data-index="${attempts}${index}"]`
-    );
-
-    if (key === "BACKSPACE") handleBackspace();
-    else if (index < 4 && attempts < 6 && keyCode === 13)
-      alert("영문 다섯 글자를 모두 입력해주세요.");
-    else if (index === 5) {
-      if (keyCode === 13) handleEnterKey(e);
-      else return;
-    } else if (/^[a-zA-Z]$/.test(key)) {
-      // a ~ z 영문만 입력 가능
-      board.innerText = key;
-      index++;
-    }
-
-    // test
-    // console.log(`key: ${key} keyCode: ${keyCode}`);
-  };
-
-  window.addEventListener("keydown", handleKeyDown);
-  handleKeyBoardClick();
-
-  timer = startTimer();
+  if (!isWin) gameOverEl.querySelector(".title").innerText = "Lose 😭";
 
   initCloseButton();
   initReplayButton();
+};
+
+const nextLine = () => {
+  attempts++;
+  index = 0;
+
+  if (attempts >= MAX_ATTEMPTS) {
+    gameOver(false);
+  }
+};
+
+// ==============================
+// Input Handlers
+// ==============================
+const handleBackspace = () => {
+  if (index === 0) return;
+
+  index--;
+  getBlock(attempts, index).textContent = "";
+};
+
+const handleEnter = () => {
+  if (index < WORD_LENGTH) {
+    // if (index < 4 && key === "Enter")
+    alert("영문 다섯 글자를 모두 입력해주세요.");
+    return;
+  }
+
+  let correctCount = 0;
+
+  for (let i = 0; i < WORD_LENGTH; i++) {
+    const block = getBlock(attempts, i);
+    const letter = block.innerText;
+    const answerLetter = ANSWER[i];
+    const keyBtn = getKeyboardKey(letter.toLowerCase());
+
+    if (letter === answerLetter) {
+      correctCount++;
+      block.classList.add("correct");
+      keyBtn?.classList.add("correct");
+    } else if (ANSWER.includes(letter)) {
+      block.classList.add("includes");
+      keyBtn?.classList.add("includes");
+    } else {
+      block.classList.add("not-correct");
+      keyBtn?.classList.add("not-correct");
+    }
+  }
+
+  if (correctCount === WORD_LENGTH) {
+    gameOver(true);
+  } else {
+    nextLine();
+  }
+};
+
+const handleInput = (key) => {
+  // Backspace
+  if (key === "Backspace") {
+    handleBackspace();
+    return;
+  }
+
+  // Enter
+  if (key === "Enter") {
+    handleEnter();
+    return;
+  }
+
+  // Alphabet input
+  if (!allowed.test(key)) return;
+  if (index >= WORD_LENGTH) return;
+
+  getBlock(attempts, index).textContent = key;
+  index++;
+};
+
+// ==============================
+// Event Handlers
+// ==============================
+const handleKeyDown = (e) => handleInput(e.key);
+
+const handleKeyBoardClick = (e) => {
+  const key = e.target.dataset?.key;
+  if (!key) return;
+  handleInput(key);
+};
+
+// ==============================
+// App Start
+// ==============================
+function appStart() {
+  window.addEventListener("keydown", handleKeyDown);
+
+  const keyBoards = document.querySelector("footer");
+  keyBoards.addEventListener("click", handleKeyBoardClick);
+
+  timer = updateTime();
 }
 
 appStart();
