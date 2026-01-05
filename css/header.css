@@ -71,3 +71,16 @@ header {
     transform: scale(1);
   }
 }
+
+@media (max-width: 375px) {
+  header {
+    justify-content: flex-start;
+    gap: 16px;
+
+    & .title {
+      position: static;
+      transform: translate(0, 0);
+      flex: 1;
+    }
+  }
+}
