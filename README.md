@@ -7,7 +7,7 @@ NYT Wordle을 참고해 **HTML / CSS / Vanilla JavaScript**로 구현한 단어 
 
 ## 📌 프로젝트 개요
 
-🔗 **배포 주소 (Demo)**
+🔗 **배포 주소 (Demo)**  
 [https://pingandthepong-wordle.netlify.app](https://pingandthepong-wordle.netlify.app)
 
 > ※ 학습용 프로젝트로 임의의 배포 주소를 사용했습니다.
@@ -125,7 +125,9 @@ const getBlock = (row, col) =>
 - `vw / vh` 단위를 사용해 화면 크기에 따라 게임 오버 모달 크기 자동 조절
 - 중앙 정렬(`transform: translate(-50%, -50%)`)로 해상도 무관한 위치 유지
 - 모바일에서도 가상 키보드 조작 가능하도록 버튼 기반 UI 구성
-- 애니메이션(`@keyframes ceremony`) 적용 시 화면 이탈 없이 자연스러운 등장 연출
+- `touch-action: manipulation` 적용으로 **모바일 터치 시 더블 탭/핀치 줌 방지**
+- 미디어 쿼리를 통해 모바일 환경에서 키 크기 및 텍스트 크기 조정
+- 애니메이션 적용 시 레이아웃이 깨지지 않도록 transform 기반 효과 사용
 
 ---
 
