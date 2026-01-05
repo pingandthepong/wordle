@@ -51,10 +51,13 @@ section.game-board .boards {
 
       &.includes {
         background-color: yellow;
+        animation: includesAni 1s 3;
       }
+
       &.not-correct {
         background-color: gray;
         color: #fff;
+        animation: notCorrectAni 0.65s 3;
       }
     }
   }
@@ -66,5 +69,40 @@ section.game-board .boards {
   }
   50% {
     transform: translateY(-10px);
+  }
+}
+@keyframes notCorrectAni {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+}
+@keyframes includesAni {
+  0% {
+    transform: scale(1);
+  }
+
+  10%,
+  20% {
+    transform: scale(0.9) rotate(-8deg);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: scale(1.1) rotate(8deg);
+  }
+
+  40%,
+  60% {
+    transform: scale(1.1) rotate(-8deg);
+  }
+
+  80% {
+    -webkit-transform: scale(1) rotate(0);
+    -ms-transform: scale(1) rotate(0);
+    transform: scale(1) rotate(0);
   }
 }
