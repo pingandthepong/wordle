@@ -30,7 +30,25 @@ section.game-board .boards {
       &.correct {
         background-color: green;
         color: #fff;
+        animation: correctAni 0.65s ease-in-out;
+
+        &:nth-of-type(1) {
+          animation-delay: 0s;
+        }
+        &:nth-of-type(2) {
+          animation-delay: 0.25s;
+        }
+        &:nth-of-type(3) {
+          animation-delay: 0.5s;
+        }
+        &:nth-of-type(4) {
+          animation-delay: 0.75s;
+        }
+        &:nth-of-type(5) {
+          animation-delay: 1s;
+        }
       }
+
       &.includes {
         background-color: yellow;
       }
@@ -39,5 +57,14 @@ section.game-board .boards {
         color: #fff;
       }
     }
+  }
+}
+
+@keyframes correctAni {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
