@@ -11,12 +11,9 @@ import { startTimer } from "./utils.js";
 // DONE 4. 게임 종료 판단
 // DONE 5. (추가) 상단에 게임 시간 표시
 // DONE 6. (선택) 키보드에도 동일하게 표시
-// 7. (선택) 키보드 클릭으로도 입력
+// DONE 7. (선택) 키보드 클릭으로도 입력
 // ==================================================
 
-const ANSWER = "APPLE";
-let attempts = 0;
-let index = 0;
 let timer;
 
 function appStart() {
@@ -110,8 +107,10 @@ function appStart() {
   };
 
   window.addEventListener("keydown", handleKeyDown);
+  handleKeyBoardClick();
 
   timer = startTimer();
+
   initCloseButton();
   initReplayButton();
 }
