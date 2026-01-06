@@ -18,7 +18,6 @@ import { initCloseButton, initReplayButton, updateTime } from "./utils.js";
 const WORD_LENGTH = 5;
 const MAX_ATTEMPTS = 6;
 const allowed = /^[a-zA-Z]$/;
-const ANSWER = "APPLE";
 
 // ==============================
 // State
@@ -74,7 +73,7 @@ const handleBackspace = () => {
   getBlock(attempts, index).textContent = "";
 };
 
-const handleEnter = () => {
+const handleEnter = async () => {
   if (index < WORD_LENGTH) {
     // if (index < 4 && key === "Enter")
     alert("영문 다섯 글자를 모두 입력해주세요.");
@@ -82,6 +81,9 @@ const handleEnter = () => {
   }
 
   let correctCount = 0;
+
+  const response = await fetch("/answer");
+  const ANSWER = await response.json();
 
   for (let i = 0; i < WORD_LENGTH; i++) {
     const block = getBlock(attempts, i);
